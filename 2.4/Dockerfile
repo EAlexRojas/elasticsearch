@@ -49,6 +49,8 @@ RUN set -ex \
 		chown -R elasticsearch:elasticsearch "$path"; \
 	done
 
+RUN /usr/share/elasticsearch/bin/plugin install mobz/elasticsearch-head
+
 COPY config ./config
 
 VOLUME /usr/share/elasticsearch/data

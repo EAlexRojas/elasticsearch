@@ -36,6 +36,10 @@ RUN set -x \
 
 ENV PATH /usr/share/elasticsearch/bin:$PATH
 
+RUN sed -i "s/PASS_MIN_DAYS.*/PASS_MIN_DAYS	1/" /etc/login.defs
+RUN sed -i "s/PASS_MAX_DAYS.*/PASS_MAX_DAYS	90/" /etc/login.defs
+RUN sed -i -e "\$apassword [success=1 default=ignore] pam_unix.so obscure sha512 minlen=8" /etc/pam.d/common-password
+
 WORKDIR /usr/share/elasticsearch
 
 RUN set -ex \
